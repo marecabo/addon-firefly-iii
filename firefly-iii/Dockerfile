@@ -16,7 +16,7 @@ RUN \
         mariadb-client=1:10.3.27-0+deb10u1 \
         nginx=1.14.2-2+deb10u3 \
         software-properties-common=0.96.20.2-2 \
-        unzip=6.0-23+deb10u1 \
+        unzip=6.0-23+deb10u2 \
     #Requires PHP 7.4
     && curl -J -L -o /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
     && echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list \
