@@ -92,6 +92,11 @@ server is listening on.
 
 Your Mapbox API key for showing a map on the page of a tag.
 
+### Option: `app_key`
+
+Your `app_key` to use for accessing an encrypted restored database. This option is
+only used when first starting the addon.
+
 ## Database usage
 
 By default, Firefly-III will automatically use and configure the Home Assistant

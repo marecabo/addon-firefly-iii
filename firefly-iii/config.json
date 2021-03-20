@@ -33,6 +33,7 @@
     "certfile": "str",
     "keyfile": "str",
     "ssl": "bool",
-    "mapbox_api_key": "str?"
+    "mapbox_api_key": "str?",
+    "app_key": "str?"
   }
 }

@@ -19,14 +19,22 @@ fi
 rm -r /var/www/firefly/storage/upload
 ln -s /data/firefly/upload /var/www/firefly/storage/upload
 
-#Create API key if needed
+#Create API key if needed or use the one provided from config on first start
 if ! bashio::fs.file_exists "/data/firefly/appkey.txt"; then
-	#Command fails without appkey set, this won't be used again
-	export APP_KEY=SomeRandomStringOf32CharsExactly
- 	bashio::log.info "Generating app key"
- 	key=$(php /var/www/firefly/artisan key:generate --show)
- 	echo "${key}" > /data/firefly/appkey.txt
+  if bashio::config.has_value 'app_key'; then
+    key=base64:$(bashio::config "app_key")
+  else
+	  #Command fails without appkey set, this won't be used again
+	  export APP_KEY=SomeRandomStringOf32CharsExactly
+ 	  bashio::log.info "Generating app key"
+ 	  key=$(php /var/www/firefly/artisan key:generate --show)
+  fi
+  echo "${key}" > /data/firefly/appkey.txt
  	bashio::log.info "App Key generated: ${key}"
+else
+  if bashio::config.has_value 'app_key'; then
+    bashio::log.info "Option 'app_key' is ignored, as app key is already set."
+  fi
 fi
 
 if bashio::config.has_value 'remote_mysql_host'; then
